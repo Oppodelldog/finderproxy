@@ -1,0 +1,20 @@
+[Unit]
+Description="finderproxy http and tcp proxy to flashforge finder"
+Wants=network-online.target
+After=network.target network-online.target
+
+[Service]
+Type=exec
+ExecStart=/home/pi/finderproxy/proxy -l "0.0.0.0:8899" -r "192.168.4.13:8899"
+KillMode=process
+Restart=always
+RestartSec=2min
+WorkingDirectory=/home/pi/finderproxy
+User=pi
+Group=pi
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier="finderproxy"
+
+[Install]
+WantedBy=multi-user.target
